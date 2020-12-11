@@ -1,0 +1,123 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+    <div class="container-fluid container-ext">
+        <ul class="nav nav-pills mb-3 justify-content-center nav-pill-custom" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="pills-checked-tab" data-toggle="pill" href="#pills-checked" role="tab" aria-controls="pills-checked" aria-selected="true">Checked Out</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="pills-reserved-tab" data-toggle="pill" href="#pills-reserved" role="tab" aria-controls="pills-reserved" aria-selected="false">Reserved</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="pills-favourited-tab" data-toggle="pill" href="#pills-favourited" role="tab" aria-controls="pills-favourited" aria-selected="false">Favourited</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-checked" role="tabpanel" aria-labelledby="pills-checked-tab">
+                {% if checked_out|length != 0 %}
+                    <div class="row row-cols-1 row-cols-md-3">
+                        {% for book in checked_out %}
+                            <div class="col mb-4">
+                                <div class="card mb-3" style="max-width: 650px;">
+                                    <div class="row no-gutters">
+                                        <div class="col-md-4">
+                                            <a href="{{ url_for('show_book', book_id=book['book_id']) }}">
+                                                <img src="{{ book['cover_url'] }}" class="card-img">
+                                            </a>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="card-body">
+                                                <h5 class="card-title"><a href="{{ url_for('show_book', book_id=book['book_id']) }}">{{book['title']}}</a></h5>
+                                                <p class="card-text card-text-custom"><b>Author:</b> {{book['name']}}</p>
+                                                <p class="card-text card-text-custom"><b>Due Date:</b> {{book['return_date']}}</p>
+                                                <p class="card-text card-text-custom"><b>Summary:</b> {{book['summary']}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer card-footer-custom">
+                                        <a class="btn btn-secondary btn-lg btn-block"
+                                           href="{{ url_for('check_out_book', user_id=g.user['user_id'], book_id=book['book_id'], delete=True) }}">
+                                            <i class="fa fa-bookmark" aria-hidden="true"></i>   Return
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <h2 class="text-center">You currently have 0 books checked out!</h2>
+                {% endif %}
+            </div>
+            <div class="tab-pane fade" id="pills-reserved" role="tabpanel" aria-labelledby="pills-reserved-tab">
+                {% if reserved|length != 0 %}
+                    <div class="row row-cols-1 row-cols-md-3">
+                        {% for book in reserved %}
+                            <div class="col mb-4">
+                                <div class="card mb-3" style="max-width: 650px;">
+                                    <div class="row no-gutters">
+                                        <div class="col-md-4">
+                                            <a href="{{ url_for('show_book', book_id=book['book_id']) }}">
+                                                <img src="{{ book['cover_url'] }}" class="card-img">
+                                            </a>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="card-body">
+                                                <h5 class="card-title"><a href="{{ url_for('show_book', book_id=book['book_id']) }}">{{book['title']}}</a></h5>
+                                                <p class="card-text card-text-custom"><b>Author:</b> {{book['name']}}</p>
+                                                <p class="card-text card-text-custom"><b>Due Date:</b> Available Soon!</p>
+                                                <p class="card-text card-text-custom"><b>Summary:</b> {{book['summary']}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer card-footer-custom">
+                                        <a class="btn btn-secondary btn-lg btn-block"
+                                           href="{{ url_for('reserve_book', user_id=g.user['user_id'], book_id=book['book_id'], delete=True) }}">
+                                            <i class="fa fa-clock-o" aria-hidden="true"></i>   Remove Reservation
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <h2 class="text-center">You currently have 0 books reserved!</h2>
+                {% endif %}
+            </div>
+            <div class="tab-pane fade" id="pills-favourited" role="tabpanel" aria-labelledby="pills-favourited-tab">
+                {% if favourited|length != 0 %}
+                    <div class="row row-cols-1 row-cols-md-3">
+                        {% for book in favourited %}
+                            <div class="col mb-4">
+                                <div class="card mb-3" style="max-width: 650px;">
+                                    <div class="row no-gutters">
+                                        <div class="col-md-4">
+                                            <a href="{{ url_for('show_book', book_id=book['book_id']) }}">
+                                                <img src="{{ book['cover_url'] }}" class="card-img">
+                                            </a>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="card-body">
+                                                <h5 class="card-title"><a href="{{ url_for('show_book', book_id=book['book_id']) }}">{{book['title']}}</a></h5>
+                                                <p class="card-text card-text-custom"><b>Author:</b> {{book['name']}}</p>
+                                                <p class="card-text card-text-custom"><b>Summary:</b> {{book['summary']}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer card-footer-custom">
+                                        <a class="btn btn-secondary btn-lg btn-block"
+                                           href="{{ url_for('favourite_book', user_id=g.user['user_id'], book_id=book['book_id'], delete=True) }}">
+                                            <i class="fa fa-star" aria-hidden="true"></i>   Un-Favourite
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <h2 class="text-center">You currently have 0 books favourited!</h2>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

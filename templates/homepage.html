@@ -1,0 +1,29 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+    <div class="container-fluid container-ext">
+        <div class="row row-cols-1 row-cols-md-3">
+            {% for book in book_list %}
+                <div class="col mb-4">
+                    <div class="card mb-3" style="max-width: 650px;">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <a href="{{ url_for('show_book', book_id=book['book_id']) }}">
+                                    <img src="{{ book['cover_url'] }}" class="card-img">
+                                </a>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title"><a href="{{ url_for('show_book', book_id=book['book_id']) }}">{{book['title']}}</a></h5>
+                                    <p class="card-text"><b>Author:</b> <a href="{{ url_for('show_author', author_id=book['author_id']) }}">{{book['name']}}</a></p>
+                                    <p class="card-text"><b>Available Copies:</b> {{book['available_copies']}}</p>
+                                    <p class="card-text"><b>Summary:</b> {{book['summary']}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

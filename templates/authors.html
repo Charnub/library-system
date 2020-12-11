@@ -1,0 +1,45 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+    <div class="container-fluid container-ext">
+        <div class="row">
+            <div class="col-4">
+                <div class="card">
+                    <img class="card-img-top" src="{{ url_for('static', filename='images/placeholder.png') }}">
+                    <div class="card-body">
+                        <h3 class="card-title">{{author['name']}}</h3>
+                        <h4 class="card-title">Date of Birth: {{author['dob']}}</h4>
+                        <h5 class="card-title">Number of Books: {{author['total_books']}}</h5>
+                        <hr>
+                        <p class="card-text" style="text-align: justify;"><i>{{author['biography']}}</i></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="row row-cols-1 row-cols-md-2">
+                    {% for book in books %}
+                        <div class="col mb-4">
+                            <div class="card mb-3">
+                                <div class="row no-gutters">
+                                    <div class="col-md-4">
+                                        <img src="{{ book['cover_url'] }}" class="card-img">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h3 class="card-title">{{book['title']}}</h3>
+                                            <h4 class="card-title">By {{book['name']}}</h4>
+                                            <h5 class="card-title">Genre: {{book['genre']}}</h5>
+                                            <h5 class="card-title">Published Date: {{book['published_date']}}</h5>
+                                            <hr>
+                                            <p class="card-text" style="text-align: justify;"><i>{{book['summary']}}</i></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

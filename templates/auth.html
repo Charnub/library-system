@@ -1,0 +1,103 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+
+    <div class="container-fluid container-ext">
+        <div class="container-fluid container-ext">
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title text-center">Login</h3>
+                            <form action="/auth/login" method="post" class="needs-validation" novalidate>
+                                <div class="form-group">
+                                    <label for="login_username">Username:</label>
+                                    <input type="text" class="form-control" id="login_username" name="username" required>
+                                    <div class="invalid-feedback">
+                                        Please provide your Username!
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="login_password">Password:</label>
+                                    <input type="password" class="form-control" id="login_password" name="password" required>
+                                    <div class="invalid-feedback">
+                                        Please provide your Password!
+                                    </div>
+                                </div>
+                                <div class="fluid-container container-buttons">
+                                    <button type="submit" class="btn btn-secondary btn-lg btn-block auth-buttons">Login</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title text-center">Register</h3>
+                            <form action="/auth/register" method="post" class="needs-validation" novalidate>
+                                <div class="form-group">
+                                    <label for="full_name">Full Name:</label>
+                                    <input type="text" class="form-control" id="full_name" name="full_name" required>
+                                    <div class="invalid-feedback">
+                                        Please provide a Name!
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="register_username">Username:</label>
+                                    <input type="text" class="form-control" id="register_username" name="username" required>
+                                    <div class="invalid-feedback">
+                                        Please provide a Username!
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email:</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                    <div class="invalid-feedback">
+                                        Please provide an Email!
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="register_password">Password:</label>
+                                    <input type="password" class="form-control" id="register_password" name="password" required>
+                                    <div class="invalid-feedback">
+                                        Please provide a Password!
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="register_password_conf">Confirm Password:</label>
+                                    <input type="password" class="form-control" id="register_password_conf" name="confirm_password" required>
+                                    <div class="invalid-feedback">
+                                        Please type your Password again!
+                                    </div>
+                                </div>
+                                <div class="fluid-container container-buttons">
+                                    <button type="submit" class="btn btn-secondary btn-lg btn-block auth-buttons">Register</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        (function() {
+          'use strict';
+          window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+              form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                  event.preventDefault();
+                  event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+              }, false);
+            });
+          }, false);
+        })();
+    </script>
+{% endblock %}

@@ -1,0 +1,71 @@
+/*
+    Custom Nav Items
+*/
+.bg-nav-blue {
+    background-color: #0052CC;
+}
+
+.nav-link-custom {
+    color: white!important;
+}
+
+.nav-image {
+    height: 55px;
+    border-radius: 45px;
+    padding: 8px;
+}
+
+/*
+    Custom Buttons
+*/
+
+.auth-buttons {
+    padding: 5px;
+    margin-top: 24px;
+}
+
+.container-buttons {
+    padding-right: 30px!important;
+    padding-left: 30px!important;
+}
+
+.nav-pill-custom .nav-link.active {
+    background-color: #6c757d!important;
+    color: white!important;
+}
+
+.nav-pill-custom a {
+    color: #6c757d;
+}
+
+.nav-pill-custom a:hover {
+    color: #6c757d;
+}
+
+/*
+    Custom Containers
+*/
+
+.container-ext {
+    margin-top: 30px;
+    padding-right: 60px!important;
+    padding-left: 60px!important;
+}
+
+.card-footer-custom {
+    background-color: white!important;
+}
+
+.profile-card {
+    margin-left: 20rem;
+}
+
+body {
+    font-family: open-sans, sans-serif;
+    font-style: normal;
+    margin: 0px;
+}
+
+.card-text-custom {
+    margin-bottom: 0!important;
+}
